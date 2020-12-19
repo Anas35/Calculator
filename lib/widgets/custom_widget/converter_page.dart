@@ -1,37 +1,37 @@
 import 'package:calculator/src/converter/converter.dart';
-import 'package:calculator/widgets/custom_widget/keyboard.dart';
+import 'package:calculator/widgets/custom_widget/converter_keyboard.dart';
 import 'package:calculator/widgets/custom_widget/keyboard_function.dart';
 import 'package:calculator/widgets/custom_widget/popup_menu.dart';
 import 'package:flutter/material.dart';
 
-class ContentScreen<T> extends StatefulWidget {
+class ConverterPage<T> extends StatefulWidget {
 
-  final List<T> types;
+  final List<T> converterTypes;
 
-  const ContentScreen({required this.types});
+  const ConverterPage({required this.converterTypes});
 
   @override
-  _ContentScreenState<T> createState() => _ContentScreenState<T>();
+  _ConverterPageState<T> createState() => _ConverterPageState<T>();
 }
 
-class _ContentScreenState<T> extends State<ContentScreen<T>>{
+class _ConverterPageState<T> extends State<ConverterPage<T>>{
 
   late Converter<T> converter;
 
   late String value1 = converter.inputValue;
   late String value2 = converter.mainFunction();
 
-  bool isFirstButton = true;
+  bool isValue1 = true;
 
   late T type1 = converter.typeFrom;
   late T type2 = converter.typeTo;
 
-  KeyBoardController _keyBoardController = KeyBoardController.instance;
+  KeyboardController _keyBoardController = KeyboardController.instance;
 
   void changeCondition() {
     setState(() {
-      isFirstButton = !isFirstButton;
-      _keyBoardController.inputText = '0';
+      isValue1 = !isValue1;
+      _keyBoardController.inputNumber = '0';
 
       var temp = converter.typeFrom;
       converter.typeFrom = converter.typeTo;
@@ -42,27 +42,27 @@ class _ContentScreenState<T> extends State<ContentScreen<T>>{
   void getText(String inputValue) {
     setState(() {
       converter.inputValue = inputValue;
-      value1 = isFirstButton ? converter.inputValue : converter.mainFunction();
-      value2 = isFirstButton ? converter.mainFunction() : converter.inputValue; 
+      value1 = isValue1 ? converter.inputValue : converter.mainFunction();
+      value2 = isValue1 ? converter.mainFunction() : converter.inputValue; 
     });
   }
 
-  void setSelected(value) {
+  void setType(value) {
     setState(() {
-      isFirstButton ? converter.typeFrom = value : converter.typeTo = value;
-      renderAnswer();
+      isValue1 ? converter.typeFrom = value : converter.typeTo = value;
+      showAnswer();
     });
   }
 
-  void getSelected(value) {
+  void getType(value) {
     setState(() {
-      isFirstButton ? converter.typeTo = value : converter.typeFrom = value;
-      renderAnswer();
+      isValue1 ? converter.typeTo = value : converter.typeFrom = value;
+      showAnswer();
     });
   }
 
-  void renderAnswer() {
-      if (isFirstButton) {
+  void showAnswer() {
+      if (isValue1) {
         value2 = converter.mainFunction();
       } else {
         value1 = converter.mainFunction();
@@ -71,8 +71,8 @@ class _ContentScreenState<T> extends State<ContentScreen<T>>{
 
   @override
   void initState() {
-    converter = Converter<T>(inputValue: '0', typeFrom: widget.types[0], typeTo: widget.types[1]);
-    renderAnswer();
+    converter = Converter<T>(inputValue: '0', typeFrom: widget.converterTypes[0], typeTo: widget.converterTypes[1]);
+    showAnswer();
     super.initState();
   }
 
@@ -97,14 +97,14 @@ class _ContentScreenState<T> extends State<ContentScreen<T>>{
                         style: TextStyle(
                             fontSize: 56,
                             fontWeight:
-                                isFirstButton ? FontWeight.bold : FontWeight.w500),
+                                isValue1 ? FontWeight.bold : FontWeight.w500),
                       ),
                     ),
                   ),
                 ),
                 MenuSelection(
-                  types: widget.types,
-                  onSelected: setSelected,
+                  types: widget.converterTypes,
+                  onSelected: setType,
                 ),
                 Expanded(
                   child: GestureDetector(
@@ -115,15 +115,15 @@ class _ContentScreenState<T> extends State<ContentScreen<T>>{
                         style: TextStyle(
                             fontSize: 56,
                             fontWeight:
-                                !isFirstButton ? FontWeight.bold : FontWeight.w500),
+                                !isValue1 ? FontWeight.bold : FontWeight.w500),
                       ),
                     ),
                   ),
                 ),
                 MenuSelection(
-                  types: widget.types,
-                  initialType: widget.types[1],
-                  onSelected: getSelected,
+                  types: widget.converterTypes,
+                  initialType: widget.converterTypes[1],
+                  onSelected: getType,
                 ),
               ],
             ),
@@ -131,8 +131,8 @@ class _ContentScreenState<T> extends State<ContentScreen<T>>{
         ),
         Expanded(
           flex: 6,
-          child: Keyboard(
-            getValue: getText,
+          child: ConverterKeyboard(
+            getInputNumbers: getText,
           ),
         ),
       ],

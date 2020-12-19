@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'keyboard_function.dart';
 
-class Keyboard extends StatefulWidget {
+class ConverterKeyboard extends StatefulWidget {
 
-  final GetValue getValue;
+  final GetInputNumbers getInputNumbers;
 
-  const Keyboard({required this.getValue});
+  const ConverterKeyboard({required this.getInputNumbers});
 
   @override
-  _KeyboardState createState() => _KeyboardState();
+  _ConverterKeyboardState createState() => _ConverterKeyboardState();
 }
 
-class _KeyboardState extends State<Keyboard> {
+class _ConverterKeyboardState extends State<ConverterKeyboard> {
 
-  KeyBoardController keyBoardController = KeyBoardController.instance;
+  KeyboardController keyBoardController = KeyboardController.instance;
 
-  late List<String> letters = keyBoardController.letters;
+  late List<String> keys = keyBoardController.keys;
 
-  void getText(int index) {
-     keyBoardController.getFunction(index);
-     widget.getValue(keyBoardController.inputText);
+  void getNumber(int index) {
+     keyBoardController.showNumber(index);
+     widget.getInputNumbers(keyBoardController.inputNumber);
   }
   
   @override
@@ -56,10 +56,10 @@ class _KeyboardState extends State<Keyboard> {
                             size: 32,
                           )
                         : Text(
-                             letters[index],
+                             keys[index],
                           ),
                     onPressed: () {
-                       getText(index);
+                       getNumber(index);
                     },
                   ),
                 );

@@ -1,16 +1,16 @@
-typedef GetValue = void Function(String);
+typedef GetInputNumbers = void Function(String);
 
-class KeyBoardController {
+class KeyboardController {
 
-  static final KeyBoardController _temperatureConverter = KeyBoardController._internal();
+  static final KeyboardController _keyboardConverter = KeyboardController._internal();
 
-  KeyBoardController._internal();
+  KeyboardController._internal();
 
-  static KeyBoardController get instance => _temperatureConverter;
+  static KeyboardController get instance => _keyboardConverter;
 
-  String inputText = '0';
+  String inputNumber = '0';
 
-  final List<String> letters = [
+  final List<String> keys = [
     '',
     '0',
     '.',
@@ -28,43 +28,43 @@ class KeyBoardController {
     '',
   ];
 
-  void getFunction(int index) {
+  void showNumber(int index) {
 
-    if(letters[index] == '.' && inputText.length < 9) {
+    if(keys[index] == '.' && inputNumber.length < 9) {
       _dot();
-    } else if (letters[index] == 'CE') {
+    } else if (keys[index] == 'CE') {
       _clearAll();
     } else if (index == 14) {
       _clear();
-    } else if(inputText.length < 10) {
-      _text(letters[index]);
+    } else if(inputNumber.length < 10) {
+      _number(keys[index]);
     }
   } 
 
   void _clearAll() {
-     inputText = '0';
+     inputNumber = '0';
   }
 
   void _clear() {
-    if(inputText != '0'){
-       inputText = inputText.substring(0, inputText.length - 1);
+    if(inputNumber != '0'){
+       inputNumber = inputNumber.substring(0, inputNumber.length - 1);
     }
 
-    if(inputText.isEmpty) inputText = '0';
+    if(inputNumber.isEmpty) inputNumber = '0';
   }
 
   void _dot() {
-    assert(inputText.isNotEmpty);
+    assert(inputNumber.isNotEmpty);
 
-    if(inputText.contains('.')){
+    if(inputNumber.contains('.')){
        return;
     } else {
-      inputText += '.';
+      inputNumber += '.';
     }
   }
 
-  void _text(String value) {
-    if(inputText.startsWith('0') && !inputText.contains('0.')) inputText = ''; 
-    inputText += value;
+  void _number(String number) {
+    if(inputNumber.startsWith('0') && !inputNumber.contains('0.')) inputNumber = ''; 
+    inputNumber += number;
   }
 }

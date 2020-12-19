@@ -1,7 +1,7 @@
 import 'package:calculator/src/converter/type.dart';
 import 'package:calculator/extension.dart';
 
-class Calculation {
+class ConverterValues {
 
   static final Map<Type,Map<dynamic,num>> _convert = {
   /*  Voulme: {
