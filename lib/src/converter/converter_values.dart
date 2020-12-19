@@ -4,22 +4,22 @@ import 'package:calculator/extension.dart';
 class ConverterValues {
 
   static final Map<Type,Map<dynamic,num>> _convert = {
-  /*  Voulme: {
-      Voulme.Milliliters: ,
-      Voulme.Cubic_centimeters: ,
-      Voulme.Liters: ,
-      Voulme.Cubic_meters: ,
-      Voulme.Teaspoons: ,
-      Voulme.Tablespoons: ,
-      Voulme.Fluid_ounces: ,
-      Voulme.Cups: ,
-      Voulme.Pints: ,
-      Voulme.Quarts: ,
-      Voulme.Gallons: ,
-      Voulme.Cubic_inches: ,
-      Voulme.Cubic_feet: ,
-      Voulme.Cubic_yards: ,
-    },*/
+    Voulme: {
+      Voulme.Milliliters: 1,
+      Voulme.Cubic_centimeters: 1,
+      Voulme.Liters: 1000,
+      Voulme.Cubic_meters: 1e+6,
+      Voulme.Teaspoons: 4.929,
+      Voulme.Tablespoons: 14.787,
+      Voulme.Fluid_ounces: 28.413,
+      Voulme.Cups: 284,
+      Voulme.Pints: 568,
+      Voulme.Quarts: 1137,
+      Voulme.Gallons: 4546,
+      Voulme.Cubic_inches: 16.387,
+      Voulme.Cubic_feet: 28317,
+      Voulme.Cubic_yards: 764555,
+    },
     Length: {
       Length.Nanometers: 1,
       Length.Microns: 1000,
@@ -48,7 +48,6 @@ class ConverterValues {
       Weight_and_Mass.Stone: 31751.47,
     },
     Energy: {
-      ///TODO: to check value is correct
       Energy.Electron_volts: 1,
       Energy.Joules: 6.242e+18,
       Energy.KiloJoules: 9.223e+18,
@@ -76,23 +75,24 @@ class ConverterValues {
       Speed.Miles_per_hour: 44.704,
       Speed.Knots: 51.444,
     },
-    /*Time: {
-      Time.Microseconds: ,
-      Time.Milliseconds: ,
-      Time.Seconds: ,
-      Time.Minutes: ,
-      Time.Hour: ,
-      Time.Days: ,
-      Time.Weeks: ,
-      Time.Years: ,
+    Time: {
+      Time.Microseconds: 1,
+      Time.Milliseconds: 1000,
+      Time.Seconds: 1e+6,
+      Time.Minutes: 6e+7,
+      Time.Hour: 3.6e+9,
+      Time.Days: 8.64e+10,
+      Time.Weeks: 6.048e+11,
+      Time.Months: 2.628e+12,
+      Time.Years: 3.154e+13,
     },
     Power: {
-      Power.Watts: ,
-      Power.Kilowatts: ,
-      Power.Horspower: ,
-      Power.Foot_pounds_by_minute: ,
-      Power.BTUs_by_minute: ,
-    },*/
+      Power.Watts: 1,
+      Power.Kilowatts: 1000,
+      Power.Horspower: 746,
+      Power.Foot_pounds_by_minute: 2.259697e-2,
+      Power.BTUs_by_minute: 17.584,
+    },
     Pressure: {
       Pressure.Atmospheres: 101325,
       Pressure.Bars: 100000,
