@@ -26,71 +26,58 @@ class _ContentScreenState<T> extends State<ContentScreen<T>>{
   late T type1 = converter.typeFrom;
   late T type2 = converter.typeTo;
 
-  bool check = true;
-
   KeyBoardController _keyBoardController = KeyBoardController.instance;
 
   void changeCondition() {
     setState(() {
       isFirstButton = !isFirstButton;
-      check = false;
       _keyBoardController.inputText = '0';
 
       var temp = converter.typeFrom;
       converter.typeFrom = converter.typeTo;
       converter.typeTo = temp;
-
-      check = false;
     });
   }
 
   void getText(String inputValue) {
     setState(() {
-
       converter.inputValue = inputValue;
-
-      if (isFirstButton) {
-        value1 = converter.inputValue;
-        value2 = converter.mainFunction();
-      } else {
-        value2 = converter.inputValue;
-        value1 = converter.mainFunction();
-      }
+      value1 = isFirstButton ? converter.inputValue : converter.mainFunction();
+      value2 = isFirstButton ? converter.mainFunction() : converter.inputValue; 
     });
   }
 
   void setSelected(value) {
     setState(() {
       isFirstButton ? converter.typeFrom = value : converter.typeTo = value;
-      isFirstButton ? type1 = value : type2 = value;
+      renderAnswer();
     });
   }
 
   void getSelected(value) {
     setState(() {
       isFirstButton ? converter.typeTo = value : converter.typeFrom = value;
-      isFirstButton ? type2 = value : type1 = value;
+      renderAnswer();
     });
   }
 
-  @override
-  void initState() {
-    converter = Converter<T>(inputValue: '0', typeFrom: widget.types[0], typeTo: widget.types[1]);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (check) {
+  void renderAnswer() {
       if (isFirstButton) {
         value2 = converter.mainFunction();
       } else {
         value1 = converter.mainFunction();
       }
-    }
+  }
 
-    check = true;
+  @override
+  void initState() {
+    converter = Converter<T>(inputValue: '0', typeFrom: widget.types[0], typeTo: widget.types[1]);
+    renderAnswer();
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -101,28 +88,36 @@ class _ContentScreenState<T> extends State<ContentScreen<T>>{
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                  onTap: changeCondition,
-                  child: Text(
-                    value1,
-                    style: TextStyle(
-                        fontSize: 56,
-                        fontWeight:
-                            isFirstButton ? FontWeight.bold : FontWeight.w500),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: changeCondition,
+                    child: FittedBox(
+                      child: Text(
+                        value1,
+                        style: TextStyle(
+                            fontSize: 56,
+                            fontWeight:
+                                isFirstButton ? FontWeight.bold : FontWeight.w500),
+                      ),
+                    ),
                   ),
                 ),
                 MenuSelection(
                   types: widget.types,
                   onSelected: setSelected,
                 ),
-                GestureDetector(
-                  onTap: changeCondition,
-                  child: Text(
-                    value2,
-                    style: TextStyle(
-                        fontSize: 56,
-                        fontWeight:
-                            !isFirstButton ? FontWeight.bold : FontWeight.w500),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: changeCondition,
+                    child: FittedBox(
+                      child: Text(
+                        value2,
+                        style: TextStyle(
+                            fontSize: 56,
+                            fontWeight:
+                                !isFirstButton ? FontWeight.bold : FontWeight.w500),
+                      ),
+                    ),
                   ),
                 ),
                 MenuSelection(

@@ -1,7 +1,6 @@
 import 'package:calculator/src/converter/temperature.dart';
 import 'package:calculator/src/converter/type.dart';
 import 'package:calculator/widgets/custom_widget/content_screen.dart';
-import 'package:calculator/widgets/custom_widget/keyboard.dart';
 import 'package:calculator/widgets/custom_widget/keyboard_function.dart';
 import 'package:flutter/material.dart';
 
