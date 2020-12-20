@@ -7,7 +7,7 @@ class Converter<T> {
   T typeFrom;
   T typeTo;
 
-  Converter({required this.inputValue, required this.typeFrom, required this.typeTo}){
+  Converter(this.inputValue,{required this.typeFrom, required this.typeTo}){
     mainFunction();
   }
 

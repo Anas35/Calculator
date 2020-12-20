@@ -71,7 +71,7 @@ class _ConverterPageState<T> extends State<ConverterPage<T>>{
 
   @override
   void initState() {
-    converter = Converter<T>(inputValue: '0', typeFrom: widget.converterTypes[0], typeTo: widget.converterTypes[1]);
+    converter = Converter<T>('0', typeFrom: widget.converterTypes[0], typeTo: widget.converterTypes[1]);
     showAnswer();
     super.initState();
   }
