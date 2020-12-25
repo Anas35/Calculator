@@ -2,16 +2,12 @@ typedef GetInputNumbers = void Function(String);
 
 class KeyboardController {
 
-  static final KeyboardController _keyboardConverter = KeyboardController._internal();
-
-  KeyboardController._internal();
-
-  static KeyboardController get instance => _keyboardConverter;
+  KeyboardController();
 
   String inputNumber = '0';
 
-  final List<String> keys = [
-    '',
+  final List<String> characters = [
+    '+/-',
     '0',
     '.',
     '1',
@@ -30,23 +26,35 @@ class KeyboardController {
 
   void showNumber(int index) {
 
-    if(keys[index] == '.' && inputNumber.length < 9) {
+    if(index == 0) {
+      _changeSign();
+    } else if(characters[index] == '.' && inputNumber.length < 9) {
       _dot();
-    } else if (keys[index] == 'CE') {
+    } else if (characters[index] == 'CE') {
       _clearAll();
     } else if (index == 14) {
       _clear();
     } else if(inputNumber.length < 10) {
-      _number(keys[index]);
+      _number(characters[index]);
     }
   } 
+
+  void _changeSign() {
+    if(!inputNumber.contains('-')){
+      inputNumber = '-' + inputNumber;
+    } else {
+      inputNumber = inputNumber.substring(1, inputNumber.length);
+    }
+  }
 
   void _clearAll() {
      inputNumber = '0';
   }
 
   void _clear() {
-    if(inputNumber != '0'){
+    if(inputNumber.contains('-') && inputNumber.length == 2){
+      inputNumber = inputNumber.substring(1, inputNumber.length - 1);
+    } else if(inputNumber != '0'){
        inputNumber = inputNumber.substring(0, inputNumber.length - 1);
     }
 
@@ -65,6 +73,7 @@ class KeyboardController {
 
   void _number(String number) {
     if(inputNumber.startsWith('0') && !inputNumber.contains('0.')) inputNumber = ''; 
+    if(inputNumber == '-0') inputNumber = '-';
     inputNumber += number;
   }
 }

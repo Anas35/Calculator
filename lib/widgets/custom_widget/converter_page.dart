@@ -26,7 +26,7 @@ class _ConverterPageState<T> extends State<ConverterPage<T>>{
   late T type1 = converter.typeFrom;
   late T type2 = converter.typeTo;
 
-  KeyboardController _keyBoardController = KeyboardController.instance;
+  KeyboardController _keyBoardController = KeyboardController();
 
   void changeCondition() {
     setState(() {
@@ -131,7 +131,8 @@ class _ConverterPageState<T> extends State<ConverterPage<T>>{
         ),
         Expanded(
           flex: 6,
-          child: ConverterKeyboard(
+          child: ConverterKeyboard<T>(
+            keyboardController: _keyBoardController,
             getInputNumbers: getText,
           ),
         ),

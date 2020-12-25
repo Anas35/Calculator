@@ -108,3 +108,9 @@ enum Angle {
   Radians,
   Gradians,
 }
+
+enum Temperature {
+  Celsius,
+  Fahrenheit,
+  Kelvin
+}

@@ -1,10 +1,5 @@
 import 'package:calculator/extension.dart';
-
-enum Temperature {
-  Celsius,
-  Fahrenheit,
-  Kelvin
-}
+import 'package:calculator/src/converter/type.dart';
 
 class TemperatureConverter {
 

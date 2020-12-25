@@ -1,27 +1,51 @@
+import 'package:calculator/src/converter/type.dart';
 import 'package:flutter/material.dart';
 import 'keyboard_function.dart';
 
-class ConverterKeyboard extends StatefulWidget {
-
+class ConverterKeyboard<T> extends StatefulWidget {
   final GetInputNumbers getInputNumbers;
+  final KeyboardController keyboardController;
 
-  const ConverterKeyboard({required this.getInputNumbers});
+  const ConverterKeyboard({required this.getInputNumbers, required this.keyboardController});
 
   @override
-  _ConverterKeyboardState createState() => _ConverterKeyboardState();
+  _ConverterKeyboardState<T> createState() => _ConverterKeyboardState<T>();
 }
 
-class _ConverterKeyboardState extends State<ConverterKeyboard> {
+class _ConverterKeyboardState<T> extends State<ConverterKeyboard<T>> {
 
-  KeyboardController keyBoardController = KeyboardController.instance;
+  bool sign() {
+    switch (T) {
+      case Temperature:
+      case Power:
+      case Angle:
+        return true;
+      default:
+        return false;
+    }
+  }
 
-  late List<String> keys = keyBoardController.keys;
+  Widget buttons(int index) {
+    if (index == 12 || (index == 0 && !sign())) {
+      return SizedBox(key: Key('SizedBox'));
+    } else {
+      return MyButton(
+        text: characters,
+        index: index,
+        function: () {
+          getNumber(index);
+        },
+      );
+    }
+  }
+
+  late List<String> characters = widget.keyboardController.characters;
 
   void getNumber(int index) {
-     keyBoardController.showNumber(index);
-     widget.getInputNumbers(keyBoardController.inputNumber);
+    widget.keyboardController.showNumber(index);
+    widget.getInputNumbers(widget.keyboardController.inputNumber);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return GridView(
@@ -35,37 +59,42 @@ class _ConverterKeyboardState extends State<ConverterKeyboard> {
       children: List.generate(
         15,
         (index) {
-          return index == 0 || index == 12
-              ? SizedBox()
-              : ElevatedButtonTheme(
-                  data: ElevatedButtonThemeData(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(),
-                      primary: Colors.black.withOpacity(
-                          index == 13 || index == 14 ? 0.50 : 0.75),
-                      textStyle: TextStyle(
-                          fontSize: index == 13 ? 24 : 32,
-                          fontWeight: index == 13 ? FontWeight.w400 : FontWeight.w700
-                        ),
-                      ),
-                    ),
-                  child: ElevatedButton(
-                    child: index == 14
-                        ? Icon(
-                            Icons.close_sharp,
-                            size: 32,
-                          )
-                        : Text(
-                             keys[index],
-                          ),
-                    onPressed: () {
-                       getNumber(index);
-                    },
-                  ),
-                );
+          return buttons(index);
         },
       ),
       reverse: true,
     );
   }
+}
+
+class MyButton extends StatelessWidget {
+  
+  final int index;
+  final void Function() function;
+  final List<String> text;
+
+  MyButton({required this.index, required this.function, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(), primary: color),
+      child: index == 14
+          ? Icon(Icons.close_sharp, size: 32)
+          : Text(
+              text[index],
+              style: textStyle,
+            ),
+      onPressed: function,
+    );
+  }
+
+  late final Color color = index == 13 || index == 14
+      ? Colors.black.withOpacity(0.50)
+      : Colors.black.withOpacity(0.75);
+
+  late final TextStyle textStyle = index == 13
+      ? TextStyle(fontSize: 24, fontWeight: FontWeight.w400)
+      : TextStyle(fontSize: 32, fontWeight: FontWeight.w700);
 }

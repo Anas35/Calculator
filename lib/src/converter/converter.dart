@@ -1,5 +1,6 @@
 import 'package:calculator/src/converter/converter_values.dart';
 import 'package:calculator/src/converter/temperature.dart';
+import 'package:calculator/src/converter/type.dart';
 
 class Converter<T> {
 

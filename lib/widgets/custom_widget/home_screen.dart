@@ -34,8 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
       }
   }
 
-  KeyboardController _keyBoardController = KeyboardController.instance;
-
   Drawer _drawer() {
     return Drawer(
           child: Column(
@@ -46,7 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: (){
              setState(() {
                types = typeList[index];
-               _keyBoardController.inputNumber = '0';
+           ///TODO: to set value to zero
+           
+           //    _keyBoardController.inputNumber = '0';
              });
              Navigator.pop(context);
             },

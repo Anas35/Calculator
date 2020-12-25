@@ -18,14 +18,12 @@ void main() {
       expect(converter.mainFunction(), equals('0.1745329'));
     });
 
-    // value is still 10
     test('change typeFrom', (){
       converter.typeFrom = Angle.Radians;
 
       expect(converter.mainFunction(), equals('10'));
     });
 
-    // value is still 10
     test('change typeTo', (){
       converter.typeTo = Angle.Degrees;
 
