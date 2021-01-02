@@ -21,25 +21,25 @@ class KeyboardController {
     '9',
     '',
     'CE',
-    '',
+    'Remove',
   ];
 
-  void showNumber(int index) {
+  void showNumber(String keys) {
 
-    if(index == 0) {
-      _changeSign();
-    } else if(characters[index] == '.' && inputNumber.length < 9) {
-      _dot();
-    } else if (characters[index] == 'CE') {
-      _clearAll();
-    } else if (index == 14) {
-      _clear();
+    if(keys == '+/-') {
+      changeSign();
+    } else if(keys == '.' && inputNumber.length < 9) {
+      dot();
+    } else if (keys == 'CE') {
+      clearAll();
+    } else if (keys == 'Remove') {
+      clear();
     } else if(inputNumber.length < 10) {
-      _number(characters[index]);
+      number(keys);
     }
   } 
 
-  void _changeSign() {
+  void changeSign() {
     if(!inputNumber.contains('-')){
       inputNumber = '-' + inputNumber;
     } else {
@@ -47,11 +47,11 @@ class KeyboardController {
     }
   }
 
-  void _clearAll() {
+  void clearAll() {
      inputNumber = '0';
   }
 
-  void _clear() {
+  void clear() {
     if(inputNumber.contains('-') && inputNumber.length == 2){
       inputNumber = inputNumber.substring(1, inputNumber.length - 1);
     } else if(inputNumber != '0'){
@@ -61,7 +61,7 @@ class KeyboardController {
     if(inputNumber.isEmpty) inputNumber = '0';
   }
 
-  void _dot() {
+  void dot() {
     assert(inputNumber.isNotEmpty);
 
     if(inputNumber.contains('.')){
@@ -71,7 +71,7 @@ class KeyboardController {
     }
   }
 
-  void _number(String number) {
+  void number(String number) {
     if(inputNumber.startsWith('0') && !inputNumber.contains('0.')) inputNumber = ''; 
     if(inputNumber == '-0') inputNumber = '-';
     inputNumber += number;

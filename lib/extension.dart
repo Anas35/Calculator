@@ -18,3 +18,33 @@ extension Rounded on num {
      }
   }
 }
+
+extension UsefullExtension on String {
+
+  bool endswithList(List<String> list) {
+    bool check = false;
+    for(String i in list) {
+      if(this.endsWith(i)) {
+         check = true;
+         break;
+      }
+    }
+    return check;
+  }
+
+  bool containswithList(List<String> list) {
+    bool check = false;
+    for(String i in list) {
+      if(this.contains(i)) {
+         check = true;
+         break;
+      }
+    }
+    return check;
+  }
+
+  num toNum() {
+    return num.parse(this);
+  }
+
+}

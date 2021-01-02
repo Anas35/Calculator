@@ -1,6 +1,7 @@
 import 'package:calculator/src/converter/type.dart';
+import 'package:calculator/widgets/custom_widget/keyboard_button.dart';
 import 'package:flutter/material.dart';
-import 'keyboard_function.dart';
+import 'package:calculator/src/keyboard_function.dart';
 
 class ConverterKeyboard<T> extends StatefulWidget {
   final GetInputNumbers getInputNumbers;
@@ -25,23 +26,33 @@ class _ConverterKeyboardState<T> extends State<ConverterKeyboard<T>> {
     }
   }
 
+  Color primary(int index) { 
+    return index == 13 || index == 14 ? Colors.black.withOpacity(0.50) : Colors.black.withOpacity(0.75);
+  }
+
+  TextStyle textStyle(int index) {
+    return index == 13 ? TextStyle(fontSize: 24, fontWeight: FontWeight.w400)
+      : TextStyle(fontSize: 32, fontWeight: FontWeight.w700);
+  }
+
+  ///TODO convert the index into string
+
   Widget buttons(int index) {
     if (index == 12 || (index == 0 && !sign())) {
       return SizedBox(key: Key('SizedBox'));
     } else {
-      return MyButton(
-        text: characters,
-        index: index,
-        function: () {
-          getNumber(index);
-        },
+      return KeyboardButton(
+        child: index == 14 ? Icon(Icons.close_sharp, size: 32) : Text(characters[index]),
+        function: () => getNumber(characters[index]),
+        textStyle: textStyle(index),
+        color: primary(index),
       );
     }
   }
 
   late List<String> characters = widget.keyboardController.characters;
 
-  void getNumber(int index) {
+  void getNumber(String index) {
     widget.keyboardController.showNumber(index);
     widget.getInputNumbers(widget.keyboardController.inputNumber);
   }
@@ -65,36 +76,4 @@ class _ConverterKeyboardState<T> extends State<ConverterKeyboard<T>> {
       reverse: true,
     );
   }
-}
-
-class MyButton extends StatelessWidget {
-  
-  final int index;
-  final void Function() function;
-  final List<String> text;
-
-  MyButton({required this.index, required this.function, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(), primary: color),
-      child: index == 14
-          ? Icon(Icons.close_sharp, size: 32)
-          : Text(
-              text[index],
-              style: textStyle,
-            ),
-      onPressed: function,
-    );
-  }
-
-  late final Color color = index == 13 || index == 14
-      ? Colors.black.withOpacity(0.50)
-      : Colors.black.withOpacity(0.75);
-
-  late final TextStyle textStyle = index == 13
-      ? TextStyle(fontSize: 24, fontWeight: FontWeight.w400)
-      : TextStyle(fontSize: 32, fontWeight: FontWeight.w700);
 }

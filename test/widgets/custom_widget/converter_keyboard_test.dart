@@ -1,6 +1,6 @@
 import 'package:calculator/src/converter/type.dart';
 import 'package:calculator/widgets/custom_widget/converter_keyboard.dart';
-import 'package:calculator/widgets/custom_widget/keyboard_function.dart';
+import 'package:calculator/src/keyboard_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';

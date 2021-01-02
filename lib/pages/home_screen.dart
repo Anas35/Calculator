@@ -1,7 +1,6 @@
-import 'package:calculator/src/converter/temperature.dart';
+import 'package:calculator/pages/calculator_page.dart';
 import 'package:calculator/src/converter/type.dart';
-import 'package:calculator/widgets/custom_widget/converter_page.dart';
-import 'package:calculator/widgets/custom_widget/keyboard_function.dart';
+import 'package:calculator/pages/converter_page.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,8 +10,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  Type types = Temperature;
-  List<Type> typeList = [Temperature, Angle, Pressure, Length];
+  Type types = CalculatorPage;
+  List<Type> typeList = [CalculatorPage, Temperature, Angle, Pressure, Length];
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _body() {
     switch (types) {
+      case CalculatorPage: return CalculatorPage();
       case Temperature: return ConverterPage<Temperature>(converterTypes: Temperature.values);
       case Angle: return ConverterPage<Angle>(converterTypes: Angle.values);
       case Pressure: return ConverterPage<Pressure>(converterTypes: Pressure.values); 
@@ -44,8 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: (){
              setState(() {
                types = typeList[index];
-           ///TODO: to set value to zero
-           
+           ///TODO: to set value to zero          
            //    _keyBoardController.inputNumber = '0';
              });
              Navigator.pop(context);
