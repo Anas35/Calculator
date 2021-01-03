@@ -1,5 +1,5 @@
 import 'package:calculator/src/converter/converter.dart';
-import 'package:calculator/widgets/custom_widget/converter_keyboard.dart';
+import 'package:calculator/widgets/custom_widget/keyboard.dart';
 import 'package:calculator/src/keyboard_function.dart';
 import 'package:calculator/widgets/custom_widget/popup_menu.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +40,9 @@ class _ConverterPageState<T> extends State<ConverterPage<T>>{
   }
 
   void getText(String inputValue) {
+    _keyBoardController.showNumber(inputValue);
     setState(() {
-      converter.inputValue = inputValue;
+      converter.inputValue = _keyBoardController.inputNumber;
       value1 = isValue1 ? converter.inputValue : converter.mainFunction();
       value2 = isValue1 ? converter.mainFunction() : converter.inputValue; 
     });
@@ -131,9 +132,11 @@ class _ConverterPageState<T> extends State<ConverterPage<T>>{
         ),
         Expanded(
           flex: 6,
-          child: ConverterKeyboard<T>(
-            keyboardController: _keyBoardController,
+          child: BaseKeyboard<T>(
+            letters: _keyBoardController.characters,
             getInputNumbers: getText,
+            childAspectRatio: 1.75,
+            crossAxisCount: 3,
           ),
         ),
       ],

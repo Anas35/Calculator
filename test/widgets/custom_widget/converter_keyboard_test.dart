@@ -1,6 +1,6 @@
-import 'package:calculator/src/converter/type.dart';
-import 'package:calculator/widgets/custom_widget/converter_keyboard.dart';
+/*import 'package:calculator/src/converter/type.dart';
 import 'package:calculator/src/keyboard_function.dart';
+import 'package:calculator/widgets/custom_widget/keyboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,8 +15,7 @@ void main() {
         child: Center(
           child: Container(
             width: 200,
-            child: ConverterKeyboard<Length>(
-              keyboardController: KeyboardController(),
+            child: BaseKeyboard<Length>(
                   getInputNumbers: (String numbers) {},
                 ),
               )
@@ -240,3 +239,4 @@ void main() {
     });
   });
 }
+*/

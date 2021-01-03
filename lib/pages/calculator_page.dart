@@ -1,5 +1,5 @@
 import 'package:calculator/src/calculator/calculator_function.dart';
-import 'package:calculator/widgets/custom_widget/calculator_keyboard.dart';
+import 'package:calculator/widgets/custom_widget/keyboard.dart';
 import 'package:flutter/material.dart';
 
 class CalculatorPage extends StatefulWidget {
@@ -54,10 +54,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
                 ),),
               Expanded(
                 flex: 7,
-                child: Calculator(
+                child: BaseKeyboard(
+                  letters: calculatorFunction.characters,
                   getInputNumbers: callFunction, 
-                  calculatorFunction: calculatorFunction
-                  ),
+                  childAspectRatio: 1.35,
+                  crossAxisCount: 4,
+                  )
                 ),
             ],
           ),
