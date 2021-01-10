@@ -1,4 +1,5 @@
 import 'package:calculator/src/calculator/calculator_function.dart';
+import 'package:calculator/widgets/custom_widget/drawer.dart';
 import 'package:calculator/widgets/custom_widget/keyboard.dart';
 import 'package:flutter/material.dart';
 
@@ -35,6 +36,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            drawer: MyDrawer(),
+            appBar: AppBar(title: Text('Standard Calculator')),
             body: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [

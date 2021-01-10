@@ -1,4 +1,5 @@
 import 'package:calculator/src/converter/converter.dart';
+import 'package:calculator/widgets/custom_widget/drawer.dart';
 import 'package:calculator/widgets/custom_widget/keyboard.dart';
 import 'package:calculator/src/keyboard_function.dart';
 import 'package:calculator/widgets/custom_widget/popup_menu.dart';
@@ -79,67 +80,71 @@ class _ConverterPageState<T> extends State<ConverterPage<T>>{
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          flex: 3,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(12, 0, 16, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: changeCondition,
-                    child: FittedBox(
-                      child: Text(
-                        value1,
-                        style: TextStyle(
-                            fontSize: 56,
-                            fontWeight:
-                                isValue1 ? FontWeight.bold : FontWeight.w500),
+    return Scaffold(
+        drawer: MyDrawer(),
+        appBar: AppBar(title: Text(T.toString())),
+        body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(12, 0, 16, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: changeCondition,
+                      child: FittedBox(
+                        child: Text(
+                          value1,
+                          style: TextStyle(
+                              fontSize: 56,
+                              fontWeight:
+                                  isValue1 ? FontWeight.bold : FontWeight.w500),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                MenuSelection(
-                  types: widget.converterTypes,
-                  onSelected: setType,
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: changeCondition,
-                    child: FittedBox(
-                      child: Text(
-                        value2,
-                        style: TextStyle(
-                            fontSize: 56,
-                            fontWeight:
-                                !isValue1 ? FontWeight.bold : FontWeight.w500),
+                  MenuSelection(
+                    types: widget.converterTypes,
+                    onSelected: setType,
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: changeCondition,
+                      child: FittedBox(
+                        child: Text(
+                          value2,
+                          style: TextStyle(
+                              fontSize: 56,
+                              fontWeight:
+                                  !isValue1 ? FontWeight.bold : FontWeight.w500),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                MenuSelection(
-                  types: widget.converterTypes,
-                  initialType: widget.converterTypes[1],
-                  onSelected: getType,
-                ),
-              ],
+                  MenuSelection(
+                    types: widget.converterTypes,
+                    initialType: widget.converterTypes[1],
+                    onSelected: getType,
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        Expanded(
-          flex: 6,
-          child: BaseKeyboard<T>(
-            letters: _keyBoardController.characters,
-            getInputNumbers: getText,
-            childAspectRatio: 1.75,
-            crossAxisCount: 3,
+          Expanded(
+            flex: 6,
+            child: BaseKeyboard<T>(
+              letters: _keyBoardController.characters,
+              getInputNumbers: getText,
+              childAspectRatio: 1.75,
+              crossAxisCount: 3,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

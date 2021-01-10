@@ -4,21 +4,21 @@ import 'package:calculator/extension.dart';
 class ConverterValues {
 
   static final Map<Type,Map<dynamic,num>> _convert = {
-    Voulme: {
-      Voulme.Milliliters: 1,
-      Voulme.Cubic_centimeters: 1,
-      Voulme.Liters: 1000,
-      Voulme.Cubic_meters: 1e+6,
-      Voulme.Teaspoons: 4.929,
-      Voulme.Tablespoons: 14.787,
-      Voulme.Fluid_ounces: 28.413,
-      Voulme.Cups: 284,
-      Voulme.Pints: 568,
-      Voulme.Quarts: 1137,
-      Voulme.Gallons: 4546,
-      Voulme.Cubic_inches: 16.387,
-      Voulme.Cubic_feet: 28317,
-      Voulme.Cubic_yards: 764555,
+    Volume: {
+      Volume.Milliliters: 1,
+      Volume.Cubic_centimeters: 1,
+      Volume.Liters: 1000,
+      Volume.Cubic_meters: 1e+6,
+      Volume.Teaspoons: 4.929,
+      Volume.Tablespoons: 14.787,
+      Volume.Fluid_ounces: 28.413,
+      Volume.Cups: 284,
+      Volume.Pints: 568,
+      Volume.Quarts: 1137,
+      Volume.Gallons: 4546,
+      Volume.Cubic_inches: 16.387,
+      Volume.Cubic_feet: 28317,
+      Volume.Cubic_yards: 764555,
     },
     Length: {
       Length.Nanometers: 1,

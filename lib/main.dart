@@ -1,4 +1,4 @@
-import 'package:calculator/pages/home_screen.dart';
+import 'package:calculator/pages/calculator_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,10 +16,15 @@ class MyApp extends StatelessWidget {
           color:  Color(0xFFF2C2F33),
           elevation: 0.0
         ),
+      canvasColor: Color(0xFFF2C2F33),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+          primary: Colors.white) )
       ),
       home: SafeArea(
-        child: HomeScreen()
-      )
+        child: CalculatorPage(),
+       )
       );
   }
 }
