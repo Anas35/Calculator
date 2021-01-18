@@ -1,17 +1,17 @@
-extension Rounded on num {
+extension RoundDigits on num {
 
   String toRound() {
 
   String inputNumber = this.toString();
-  List<String> numbersList = inputNumber.contains('.') ? inputNumber.split('.') : [inputNumber];
+  List<String> splitedNumber = inputNumber.contains('.') ? inputNumber.split('.') : [inputNumber];
    
-     if(inputNumber.contains('.0') && numbersList[1].length == 1){
+     if(inputNumber.contains('.0') && splitedNumber[1].length == 1){
        return this.toInt().toString();
-     } else if(inputNumber.length > 9) {
-        if(numbersList[0].length >= 9) { 
-          return this.toStringAsPrecision(8); 
+     } else if(inputNumber.length > 12) {
+        if(splitedNumber[0].length >= 12) { 
+          return this.toStringAsPrecision(11); 
         } else {
-          return this.toStringAsFixed(8 - numbersList[0].length);
+          return this.toStringAsFixed(11 - splitedNumber[0].length);
         }      
      } else {
        return inputNumber;
@@ -22,29 +22,33 @@ extension Rounded on num {
 extension UsefullExtension on String {
 
   bool endswithList(List<String> list) {
-    bool check = false;
+    bool isEndsWith = false;
     for(String i in list) {
       if(this.endsWith(i)) {
-         check = true;
+         isEndsWith = true;
          break;
       }
     }
-    return check;
+    return isEndsWith;
   }
 
-  bool containswithList(List<String> list) {
-    bool check = false;
+  bool containsList(List<String> list) {
+    bool isContains = false;
     for(String i in list) {
       if(this.contains(i)) {
-         check = true;
+         isContains = true;
          break;
       }
     }
-    return check;
+    return isContains;
   }
 
   num toNum() {
-    return num.parse(this);
+    try {
+     return num.parse(this); 
+    } catch (e) {
+      throw e;
+    }
   }
 
 }

@@ -49,9 +49,13 @@ class _CalculatorPageState extends State<CalculatorPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(history, style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800),),
+                    Expanded(
+                        child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Text(history, style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800),)),
+                    ),
                     SizedBox(height: 10,),
-                    Text(answer, style: TextStyle(fontSize: 52, fontWeight: FontWeight.bold)),
+                    Expanded(child: FittedBox(child: Text(answer, style: TextStyle(fontSize: 52, fontWeight: FontWeight.bold)))),
                   ],
                     ),
                 ),),

@@ -79,7 +79,7 @@ class CalculatorFunction extends KeyboardController {
       if (history.endsWith('=')) deleteAll();
 
       if (_resetInput) _copyWith(number: '0', resetInput: false, temp: temporary);
-      if(history.containswithList(_inputPower) && !history.endswithList(aritmeticOperatorsList)) {
+      if(history.containsList(_inputPower) && !history.endswithList(aritmeticOperatorsList)) {
         _copyWith(temp: temporary, histo: '');
       }
 
@@ -117,7 +117,7 @@ class CalculatorFunction extends KeyboardController {
   List<String> _inputPower = ['1/', 'sqr', '√'];
 
    void cont(String characters, String char) {
-     if(history.containswithList(_inputPower) && !history.endswithList(aritmeticOperatorsList)){
+     if(history.containsList(_inputPower) && !history.endswithList(aritmeticOperatorsList)){
           history = characters; 
      } else {
           history += char; 
