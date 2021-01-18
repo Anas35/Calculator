@@ -108,7 +108,7 @@ class ConverterValues {
   };
 
   static String answer<T>(String inputValue, T typeFrom, T typeTo) {
-    print(T);
+    
     Map<dynamic,num> con = _convert[T] ?? {};
    
     num type1 = con[typeFrom] ?? 0;

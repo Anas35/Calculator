@@ -13,9 +13,11 @@ class Converter<T> {
   }
 
   String mainFunction() {
-    switch (T) {
-      case Temperature: return TemperatureConverter.instance.answer(inputValue, typeFrom as Temperature, typeTo as Temperature);
-      default: return ConverterValues.answer<T>(inputValue, typeFrom, typeTo);
+    
+    if(T == Temperature) {
+     return TemperatureConverter.instance.answer(inputValue, typeFrom as Temperature, typeTo as Temperature);
+    } else {
+     return ConverterValues.answer<T>(inputValue, typeFrom, typeTo);
     }
   }
 }

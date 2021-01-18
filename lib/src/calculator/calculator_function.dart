@@ -12,10 +12,10 @@ class CalculatorFunction extends KeyboardController {
 
   String history = '';
 
-  final BasicCalculation basicCalculation = BasicCalculation.instance;
-  final BasicPower basicPower = BasicPower.instance;
+  final BasicCalculation _basicCalculation = BasicCalculation.instance;
+  final BasicPower _basicPower = BasicPower.instance;
 
-  String? temporary;
+  String? _temporary;
 
   @override
   List<String> get characters => [
@@ -45,9 +45,9 @@ class CalculatorFunction extends KeyboardController {
         'Remove'
       ];
 
-  List<String> powerOperands = ['1/x', 'x²', '²√x',];
+  List<String> _powerOperandsList = ['1/x', 'x²', '²√x',];
 
-  List<String> aritmeticOperatorsList = ['+', '-', 'x', '÷', '%', '='];
+  List<String> _aritmeticOperatorsList = ['+', '-', 'x', '÷', '%', '='];
 
   bool _resetInput = false;
   bool _signChange = false;
@@ -57,97 +57,98 @@ class CalculatorFunction extends KeyboardController {
      _signChange = signChange ?? _signChange;
       history = histo ?? history;
       inputNumber = number ?? inputNumber;
-      temporary = temp;
+      _temporary = temp;
   }
 
   void deleteAll() {
     _copyWith(number: '0', histo: '', temp: null);
-    basicCalculation.clear();
+    _basicCalculation.clear();
   }
 
   void calculate(String char) {
 
-    if (history.endsWith('=') && aritmeticOperatorsList.contains(char)) {
-      _copyWith(histo: inputNumber, temp: null);
-      basicCalculation.clear();
-    }
+    assert(characters.contains(char));
 
-    if(inputNumber == 'Cannot divide by zero') deleteAll();
+      if (history.endsWith('=') && _aritmeticOperatorsList.contains(char)) {
+        _copyWith(histo: inputNumber, temp: null);
+        _basicCalculation.clear();
+      }
+
+      if(inputNumber == 'Cannot divide by zero') deleteAll();
 
     if (super.characters.contains(char)) {
 
       if (history.endsWith('=')) deleteAll();
 
-      if (_resetInput) _copyWith(number: '0', resetInput: false, temp: temporary);
-      if(history.containsList(_inputPower) && !history.endswithList(aritmeticOperatorsList)) {
-        _copyWith(temp: temporary, histo: '');
+      if (_resetInput) _copyWith(number: '0', resetInput: false, temp: _temporary);
+      if(history.containsList(_inputPower) && !history.endswithList(_aritmeticOperatorsList)) {
+        _copyWith(temp: _temporary, histo: '');
       }
 
-      if (char == '+/-') _copyWith(signChange: true, temp: temporary);
+      if (char == '+/-') _copyWith(signChange: true, temp: _temporary);
 
       showNumber(char);
 
-      temporary = inputNumber;
-    } else if (powerOperands.contains(char)) {
+      _temporary = inputNumber;
+    } else if (_powerOperandsList.contains(char)) {
 
       if (history.endsWith('=')) _copyWith(histo: '', temp: inputNumber);
 
-      power(char);
+      _powerCalculation(char);
     } else if (char == 'C') {
       deleteAll();
-    } else if (aritmeticOperatorsList.contains(char)) {
-      ap(char);
+    } else if (_aritmeticOperatorsList.contains(char)) {
+      _arithemticCalculation(char);
     }
   }
 
-  void ap(String char) {
+  void _arithemticCalculation(String char) {
 
-    if (temporary != null) _copyWith(histo: history + temporary!, temp: null); 
+    if (_temporary != null) _copyWith(histo: history + _temporary!, temp: null); 
 
-    if (history.endswithList(aritmeticOperatorsList) && !_signChange) {
+    if (history.endswithList(_aritmeticOperatorsList) && !_signChange) {
       history = history.substring(0, history.length - 1) + char;
-      basicCalculation.copyWith(operans: char);
+      _basicCalculation.copyWith(operans: char);
     } else {
       history += char;
-      inputNumber = basicCalculation.airthemiticOperands(inputNumber, char);
-      _copyWith(signChange: false, resetInput: true, temp: temporary);
+      inputNumber = _basicCalculation.airthemiticOperands(inputNumber, char);
+      _copyWith(signChange: false, resetInput: true, temp: _temporary);
     }
   }
 
   List<String> _inputPower = ['1/', 'sqr', '√'];
 
-   void cont(String characters, String char) {
-     if(history.containsList(_inputPower) && !history.endswithList(aritmeticOperatorsList)){
+  void _powerCalculation(String char) {
+    
+    _powersOperatorInput(char);
+
+    inputNumber = _basicPower.powerCalcualtion(char, inputNumber);
+
+    _copyWith(resetInput: true, temp: null);
+  }
+
+  void _powersOperatorInput(String char) {
+
+     if(_temporary == null) _copyWith(temp: '0');
+
+    switch (char) {
+      case '1/x':
+         _powerCondition('1/($history)', '1/($_temporary)');
+        break;
+      case 'x²':
+         _powerCondition('sqr($history)', 'sqr($_temporary)');
+      break;
+      case '²√x':
+         _powerCondition('√($history)', '√($_temporary)');
+      break;
+    }
+  }
+
+  void _powerCondition(String characters, String char) {
+     if(history.containsList(_inputPower) && !history.endswithList(_aritmeticOperatorsList)){
           history = characters; 
      } else {
           history += char; 
      }
    }
-
-
-   void powerinput(String char) {
-
-     if(temporary == null) _copyWith(temp: '0');
-
-    switch (char) {
-      case '1/x':
-         cont('1/($history)', '1/($temporary)');
-        break;
-      case 'x²':
-         cont('sqr($history)', 'sqr($temporary)');
-      break;
-      case '²√x':
-         cont('√($history)', '√($temporary)');
-      break;
-    }
-  }
-
-  void power(String char) {
-    
-    powerinput(char);
-
-    inputNumber = basicPower.powerCalcualtion(char, inputNumber);
-
-    _copyWith(resetInput: true, temp: null);
-  }
 }
