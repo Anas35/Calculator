@@ -21,7 +21,7 @@ class _MenuSelectionState<T> extends State<MenuSelection> {
     return PopupMenuItem<T>(
       value: widget.types[index],
       child: Text(
-        describeEnum(widget.types[index]),
+        describeEnum(widget.types[index]).replaceAll('_', ' '),
         style: TextStyle(
             fontSize: 22, color: Colors.white, fontWeight: FontWeight.w300),
       ),
@@ -53,7 +53,7 @@ class _MenuSelectionState<T> extends State<MenuSelection> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            describeEnum(newType),
+            describeEnum(newType).replaceAll('_', ' '),
             style: TextStyle(fontSize: 28, color: Colors.white),
           ),
           Padding(

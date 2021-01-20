@@ -54,13 +54,13 @@ enum Energy {
 }
 
 enum Area {
-  Squrae_millimeters,
-  Squrae_centimeters,
-  Squrae_meters,
+  Square_millimeters,
+  Square_centimeters,
+  Square_meters,
   Hectares,
-  Squrae_kilometers,
-  Squrae_inches,
-  Squrae_feets,
+  Square_kilometers,
+  Square_inches,
+  Square_feets,
   Square_yards,
   Acres,
   Square_miles,
