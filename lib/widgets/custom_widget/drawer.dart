@@ -1,5 +1,6 @@
 import 'package:calculator/pages/calculator_page.dart';
 import 'package:calculator/pages/converter_page.dart';
+import 'package:calculator/pages/setting.dart';
 import 'package:calculator/src/converter/type.dart';
 import 'package:flutter/material.dart';
 
@@ -35,13 +36,29 @@ class MyDrawer extends StatelessWidget {
 
   List<Widget> widget(BuildContext context) {
     List<Widget> temp = [
-      IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(
-            Icons.dehaze,
-            size: 28,
-            color: Colors.white,
-          )),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: Icon(
+                  Icons.dehaze,
+                  size: 28,
+                )),
+            IconButton(
+                onPressed: () {
+                   Navigator.pop(context);
+                   Navigator.push(context, MaterialPageRoute(builder: (_) => Setting()));
+                },
+                icon: Icon(
+                  Icons.settings,
+                  size: 28,
+                )),    
+          ],
+        ),
+      ),
     ];
 
     List.generate(myType.length, (index) {

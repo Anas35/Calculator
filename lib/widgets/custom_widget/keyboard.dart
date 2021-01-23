@@ -1,5 +1,6 @@
 import 'package:calculator/src/converter/type.dart';
 import 'package:calculator/src/keyboard_function.dart';
+import 'package:calculator/src/theme.dart';
 import 'package:calculator/widgets/custom_widget/keyboard_button.dart';
 import 'package:flutter/material.dart';
 
@@ -57,18 +58,19 @@ class BaseKeyboard<T> extends StatelessWidget {
   final List<String> _numbers = ['+/-', '0', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
   Color color(int index) {
+
     if(letters[index] == '=') {
       return Colors.cyan;
     } else if (_numbers.contains(letters[index])) {
-      return Colors.black.withOpacity(0.75);
+      return MyTheme.isLightMode ? Color(0xFFE8E8E8) : Color(0xFF0c0c0c);
     } else {
-      return Colors.black.withOpacity(0.50);
+      return MyTheme.isLightMode ? Color(0xFFD8D8D8) : Color(0xFF151515);
     }
   } 
 
   TextStyle textStyle(int index) {
     if (_numbers.contains(letters[index])) {
-      return TextStyle(fontSize: 32, fontWeight: FontWeight.w700);
+      return TextStyle(fontSize: 32, fontWeight: FontWeight.w600,);
     } else {
       return TextStyle(fontSize: 32, fontWeight: FontWeight.w400);
     }

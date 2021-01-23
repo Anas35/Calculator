@@ -22,8 +22,6 @@ class _MenuSelectionState<T> extends State<MenuSelection> {
       value: widget.types[index],
       child: Text(
         describeEnum(widget.types[index]).replaceAll('_', ' '),
-        style: TextStyle(
-            fontSize: 22, color: Colors.white, fontWeight: FontWeight.w300),
       ),
     );
   });
@@ -48,19 +46,17 @@ class _MenuSelectionState<T> extends State<MenuSelection> {
       },
       shape: BeveledRectangleBorder(
           side: BorderSide(color: Colors.white.withOpacity(0.80), width: 0.75)),
-      color: Color(0xFFF2C2F33),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             describeEnum(newType).replaceAll('_', ' '),
-            style: TextStyle(fontSize: 28, color: Colors.white),
+            style: TextStyle(fontSize: 28, color: Theme.of(context).accentColor),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 2.5, left: 2.5),
             child: Icon(
               Icons.arrow_drop_down,
-              color: Colors.white,
               size: 32,
             ),
           ),

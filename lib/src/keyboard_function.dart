@@ -28,13 +28,13 @@ class KeyboardController {
 
     if(keys == '+/-') {
       changeSign();
-    } else if(keys == '.' && inputNumber.length < 9) {
+    } else if(keys == '.' && inputNumber.length < 11) {
       dot();
     } else if (keys == 'CE') {
       clearAll();
     } else if (keys == 'Remove') {
       clear();
-    } else if(inputNumber.length < 10) {
+    } else if(inputNumber.length < 12) {
       number(keys);
     }
   } 

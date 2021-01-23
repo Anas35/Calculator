@@ -7,19 +7,25 @@ class KeyboardButton extends StatelessWidget {
   final Color? color;
   final TextStyle? textStyle;
 
-  KeyboardButton({Key? key,required this.child, required this.function, this.color, this.textStyle}) : super(key: key);
+  KeyboardButton({Key? key, required this.child, required this.function, this.color, this.textStyle})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      key: super.key,
-      style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(), 
-          primary: color,
-          textStyle: textStyle
-        ),
-      child: child,
-      onPressed: function,
+    return ElevatedButtonTheme(
+         data: ElevatedButtonThemeData(
+           style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(),
+            primary: color,
+            onPrimary: Theme.of(context).accentColor,
+            textStyle: textStyle,
+           ),
+         ),
+        child: ElevatedButton(
+        key: super.key,
+        child: child,
+        onPressed: function,
+      ),
     );
   }
 }
