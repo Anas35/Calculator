@@ -62,9 +62,9 @@ class BaseKeyboard<T> extends StatelessWidget {
     if(letters[index] == '=') {
       return Colors.cyan;
     } else if (_numbers.contains(letters[index])) {
-      return MyTheme.isLightMode ? Color(0xFFE8E8E8) : Color(0xFF0c0c0c);
+      return MyTheme.isLightMode ? Color(0xFFE8E8E8) : Color(0XFF0f0f0f);
     } else {
-      return MyTheme.isLightMode ? Color(0xFFD8D8D8) : Color(0xFF151515);
+      return MyTheme.isLightMode ? Color(0xFFD8D8D8) : Color(0xFF1c1c1c);
     }
   } 
 

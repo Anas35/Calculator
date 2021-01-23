@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'package:calculator/src/platform.dart';
+import 'package:flutter/material.dart';
 
 class StoreData {
 
   Future<File> get _createFile async {
-    final String path = await AndroidPlatform.appDir();
-    return File('$path/counter.txt');
+    final String path = await Platform.appDir();
+    return File('$path/calculator.txt');
   }
 
   Future<File>  set(bool value) async {
@@ -21,7 +22,7 @@ class StoreData {
 
     return contents.toLowerCase() == 'true' ? true : false;
   } catch (e) {
-    throw e;
+    return ThemeMode.system == ThemeMode.light;
   }
 }
 
