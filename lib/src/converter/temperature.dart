@@ -22,7 +22,6 @@ class TemperatureConverter {
       case Temperature.Fahrenheit: return toFahrenheit();
       case Temperature.Kelvin: return toKelvin();
       default:
-      /// TODO: to return default value
         return '';
     }
   }
@@ -57,7 +56,6 @@ class TemperatureConverter {
       case Temperature.Fahrenheit: return fromFahrenheit.toRound();
       case Temperature.Kelvin: return fromKelvin.toRound();
       default:
-      /// TODO: return default value
       return '';
     }
   }

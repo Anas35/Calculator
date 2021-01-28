@@ -6,7 +6,7 @@ enum Selection { A, B, C }
 
 void main() {
   testWidgets('menu selection', (WidgetTester tester) async {
-
+          
     Selection type = Selection.A;
 
     await tester.pumpWidget(MaterialApp(
@@ -40,7 +40,7 @@ void main() {
     await tester.pumpAndSettle();
 
     final changedText = find.text('B');
-    
+
     expect(changedText, findsOneWidget);
   });
 }

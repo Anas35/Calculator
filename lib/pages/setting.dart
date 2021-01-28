@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 enum Mode { Light_Mode, Dark_Mode}
 
 class Setting extends StatefulWidget {
+
+  const Setting();
+
   @override
   _SettingState createState() => _SettingState();
 }

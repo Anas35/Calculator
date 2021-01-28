@@ -11,7 +11,7 @@ class BaseKeyboard<T> extends StatelessWidget {
   final double? childAspectRatio;
   final int crossAxisCount;
 
-  BaseKeyboard({Key? key, required this.getInputNumbers, required this.letters, this.childAspectRatio, required this.crossAxisCount}) : super(key: key); 
+  const BaseKeyboard({Key? key, required this.getInputNumbers, required this.letters, this.childAspectRatio, required this.crossAxisCount}) : super(key: key); 
 
   bool sign() {
     switch (T) {
@@ -55,7 +55,7 @@ class BaseKeyboard<T> extends StatelessWidget {
     );
   }
 
-  final List<String> _numbers = ['+/-', '0', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  static const List<String> _numbers = ['+/-', '0', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
   Color color(int index) {
 

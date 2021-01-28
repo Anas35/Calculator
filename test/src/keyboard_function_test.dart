@@ -35,9 +35,9 @@ void main() {
     keyboardController.showNumber('Remove');
     expect(keyboardController.inputNumber, '12.');
 
-    keyboardController.inputNumber = '0123456789';
+    keyboardController.inputNumber = '0123456789100';
     keyboardController.showNumber('1');
-    expect(keyboardController.inputNumber, '0123456789');
+    expect(keyboardController.inputNumber, '0123456789100');
 
     keyboardController.showNumber('CE');
     expect(keyboardController.inputNumber, '0');

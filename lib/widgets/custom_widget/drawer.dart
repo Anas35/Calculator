@@ -4,8 +4,14 @@ import 'package:calculator/pages/setting.dart';
 import 'package:calculator/src/converter/type.dart';
 import 'package:flutter/material.dart';
 
+/// Only for Testing
+final List<String> log = <String>[];
+
 class MyDrawer extends StatelessWidget {
-  final List<Type> myType = [
+
+  const MyDrawer();
+
+  static const List<Type> myType = [
     CalculatorPage,
     Temperature,
     Angle,
@@ -44,7 +50,7 @@ class MyDrawer extends StatelessWidget {
             IconButton(
                 onPressed: () => Navigator.pop(context),
                 icon: Icon(
-                  Icons.dehaze,
+                  Icons.menu,
                   size: 28,
                 )),
             IconButton(
@@ -69,6 +75,9 @@ class MyDrawer extends StatelessWidget {
         child: TextButton(
           style: TextButton.styleFrom(padding: EdgeInsets.all(15)),
           onPressed: () {
+
+            log.add(myType[index].toString());
+
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => _body(myType[index])));
           },

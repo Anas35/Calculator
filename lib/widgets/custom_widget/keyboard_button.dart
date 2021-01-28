@@ -7,7 +7,7 @@ class KeyboardButton extends StatelessWidget {
   final Color? color;
   final TextStyle? textStyle;
 
-  KeyboardButton({Key? key, required this.child, required this.function, this.color, this.textStyle})
+  const KeyboardButton({Key? key, required this.child, required this.function, this.color, this.textStyle})
       : super(key: key);
 
   @override
