@@ -43,36 +43,6 @@ void main() {
 
     });
 
-    testWidgets('Navigating to Other pash', (WidgetTester tester) async {
-  
-    await tester.pumpWidget(MaterialApp(
-        home: Builder(
-          builder: (context) {
-            return Scaffold(
-            key: scaffoldKey,
-            drawer: drawer.MyDrawer(),
-            body: SizedBox(),
-            );
-          }),
-        ),
-    );
-    expect(drawer.log, isEmpty);
-
-    scaffoldKey.currentState!.openDrawer();
-
-    await tester.pumpAndSettle();
-
-    await tester.tap(find.text('Temperature'));
-
-    expect(drawer.log, equals(<String>['Temperature']));
-
-    /// Gestures between push and build are ignored 
-    await tester.tap(find.text('CalculatorPage'));
-    expect(drawer.log, equals(<String>['Temperature']));
-  });
-
-    drawer.log.clear();
-
   });
 
 }

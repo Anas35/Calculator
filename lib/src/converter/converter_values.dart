@@ -114,7 +114,7 @@ class ConverterValues {
     num type1 = con[typeFrom] ?? 0;
     num type2 = con[typeTo] ?? 0;
     
-    num value = num.parse(inputValue);
+    num value = inputValue.toNum();
 
     num answer = value/type2 * type1;
 

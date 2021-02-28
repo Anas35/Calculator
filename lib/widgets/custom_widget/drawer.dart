@@ -4,9 +4,6 @@ import 'package:calculator/pages/setting.dart';
 import 'package:calculator/src/converter/type.dart';
 import 'package:flutter/material.dart';
 
-/// Only for Testing
-final List<String> log = <String>[];
-
 class MyDrawer extends StatelessWidget {
 
   const MyDrawer();
@@ -75,9 +72,6 @@ class MyDrawer extends StatelessWidget {
         child: TextButton(
           style: TextButton.styleFrom(padding: EdgeInsets.all(15)),
           onPressed: () {
-
-            log.add(myType[index].toString());
-
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => _body(myType[index])));
           },

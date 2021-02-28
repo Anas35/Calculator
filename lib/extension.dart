@@ -21,34 +21,13 @@ extension RoundDigits on num {
 
 extension UsefullExtension on String {
 
-  bool endswithList(List<String> list) {
-    bool isEndsWith = false;
-    for(String i in list) {
-      if(this.endsWith(i)) {
-         isEndsWith = true;
-         break;
-      }
-    }
-    return isEndsWith;
-  }
+  bool endswithList(Iterable<String> list) => list.any((element) => this.endsWith(element));
 
-  bool containsList(List<String> list) {
-    bool isContains = false;
-    for(String i in list) {
-      if(this.contains(i)) {
-         isContains = true;
-         break;
-      }
-    }
-    return isContains;
-  }
+  bool containsList(Iterable<String> list) => list.any((element) => this.contains(element));
 
   num toNum() {
-    try {
-     return num.parse(this); 
-    } catch (e) {
-      throw e;
-    }
+    if(num.tryParse(this) == null) throw FormatException();
+    return num.tryParse(this)!;
   }
 
 }
